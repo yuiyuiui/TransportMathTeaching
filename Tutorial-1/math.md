@@ -1,143 +1,145 @@
-# 常微分方程分析的基本方法
+https://github.com/yuiyuiui/TransportMathTeaching
 
-本文以 Riccati 方程
+# Basic Methods for Analyzing Ordinary Differential Equations
+
+This article uses the Riccati equation
 
 $$
 y' = 1 - y^2
 $$
 
-为例，介绍分析常微分方程的几种基本方法。该方程的精确解为 $y(x) = \tanh(x + C)$，其中 $C$ 由初始条件决定。
+as an example to introduce several basic methods for analyzing ordinary differential equations. The exact solution of this equation is $y(x) = \tanh(x + C)$, where $C$ is determined by the initial condition.
 
 ---
 
-## 1. 多项式逼近（Taylor 级数展开）
+## 1. Polynomial Approximation (Taylor Series Expansion)
 
-在 $x = 0$ 附近，可将解展开为幂级数：
+Near $x = 0$, the solution can be expanded as a power series:
 
 $$
 y(x) = \sum_{k=0}^{\infty} a_k x^k
 $$
 
-**递推关系推导：**
+**Derivation of Recurrence Relation:**
 
-将 $y = \sum_k a_k x^k$ 代入 $y' = 1 - y^2$，比较 $x^k$ 系数：
+Substituting $y = \sum_k a_k x^k$ into $y' = 1 - y^2$ and comparing coefficients of $x^k$:
 
 - $y' = \sum_{k \geq 1} k a_k x^{k-1}$
 - $y^2 = \left(\sum_k a_k x^k\right)^2 = \sum_n \left(\sum_{j=0}^{n} a_j a_{n-j}\right) x^n$
 
-匹配 $x^k$ 系数得：
+Matching coefficients of $x^k$ yields:
 
 $$
 (k+1) a_{k+1} = -\sum_{j=0}^{k} a_j a_{k-j}, \quad k \geq 1
 $$
 
-**边界条件：** 若 $y(0) = 0$，则 $a_0 = 0$，$a_1$ 由 $y'(0) = 1 - y(0)^2 = 1$ 确定，即 $a_1 = 1$。
+**Boundary Conditions:** If $y(0) = 0$, then $a_0 = 0$, and $a_1$ is determined by $y'(0) = 1 - y(0)^2 = 1$, i.e., $a_1 = 1$.
 
-**特点：**
-- 在原点附近精度高，远离原点时发散
-- 适合局部分析和短时行为研究
+**Characteristics:**
+- High accuracy near the origin, diverges far from the origin
+- Suitable for local analysis and short-time behavior studies
 
 ---
 
-## 2. 稳定性分析
+## 2. Stability Analysis
 
-### 2.1 平衡点
+### 2.1 Equilibrium Points
 
-令 $y' = 0$，得平衡点 $y = \pm 1$。
+Setting $y' = 0$ yields equilibrium points $y = \pm 1$.
 
-### 2.2 线性化稳定性
+### 2.2 Linearized Stability
 
-在平衡点 $y^*$ 附近，设 $y = y^* + \epsilon$，线性化得：
+Near an equilibrium point $y^*$, setting $y = y^* + \epsilon$, linearization gives:
 
 $$
 \epsilon' = -2y^* \epsilon + O(\epsilon^2)
 $$
 
-- **$y^* = 1$（稳定）：** $\epsilon' \approx -2\epsilon$，扰动指数衰减
-- **$y^* = -1$（不稳定）：** $\epsilon' \approx 2\epsilon$，扰动指数增长
+- **$y^* = 1$ (stable):** $\epsilon' \approx -2\epsilon$, perturbations decay exponentially
+- **$y^* = -1$ (unstable):** $\epsilon' \approx 2\epsilon$, perturbations grow exponentially
 
-### 2.3 全局行为
+### 2.3 Global Behavior
 
-对于任意初值 $y(0) \in (-1, 1)$，解单调递增趋向 $y = 1$；对于 $y(0) > 1$，解单调递减趋向 $y = 1$。而 $y(0) < -1$ 时，解在有限时间内趋向 $-\infty$（爆破）。
+For any initial value $y(0) \in (-1, 1)$, the solution monotonically increases toward $y = 1$; for $y(0) > 1$, the solution monotonically decreases toward $y = 1$. When $y(0) < -1$, the solution tends to $-\infty$ in finite time (blow-up).
 
-**稳定区域图** 直观展示了不同初值对应解的渐近行为。
+The **stability region plot** visually demonstrates the asymptotic behavior of solutions for different initial values.
 
 ---
 
-## 3. 渐近稳定速度
+## 3. Asymptotic Stability Rate
 
-### 3.1 主导衰减率
+### 3.1 Dominant Decay Rate
 
-由线性化分析，当 $x \to \infty$ 时：
+From linearization analysis, as $x \to \infty$:
 
 $$
 y(x) - 1 \sim C e^{-2x}
 $$
 
-即解以指数速率 $\lambda = 2$ 趋近稳定平衡点。
+That is, the solution approaches the stable equilibrium point at an exponential rate $\lambda = 2$.
 
-### 3.2 高阶修正
+### 3.2 Higher-Order Corrections
 
-精确解 $y = \tanh(x + C)$ 可改写为：
+The exact solution $y = \tanh(x + C)$ can be rewritten as:
 
 $$
 y = \frac{1 - e^{-2(x+C)}}{1 + e^{-2(x+C)}} = 1 - \frac{2e^{-2(x+C)}}{1 + e^{-2(x+C)}}
 $$
 
-展开得到几何级数形式，显示衰减主要由 $e^{-2x}$ 及其高次幂控制。
+Expanding yields a geometric series form, showing that the decay is primarily controlled by $e^{-2x}$ and its higher powers.
 
 ---
 
-## 4. 指数逼近（渐近级数展开）
+## 4. Exponential Approximation (Asymptotic Series Expansion)
 
-当 $x \to \infty$ 时，将解展开为指数级数：
+As $x \to \infty$, expand the solution as an exponential series:
 
 $$
 y(x) = \sum_{k=0}^{N} a_k e^{-kx}
 $$
 
-**递推关系推导：**
+**Derivation of Recurrence Relation:**
 
-设 $q = e^{-x}$，则 $y' = -\sum_k k a_k q^k$，$y^2 = \sum_n \left(\sum_{j=0}^{n} a_j a_{n-j}\right) q^n$。
+Setting $q = e^{-x}$, we have $y' = -\sum_k k a_k q^k$ and $y^2 = \sum_n \left(\sum_{j=0}^{n} a_j a_{n-j}\right) q^n$.
 
-代入 $y' = 1 - y^2$ 并匹配 $q^k$ 系数：
+Substituting into $y' = 1 - y^2$ and matching coefficients of $q^k$:
 
-- **$k = 0$：** $a_0^2 = 1 \Rightarrow a_0 = 1$（取稳定解）
-- **$k = 1$：** $a_1 = 2a_0 a_1 \Rightarrow a_1 = 0$（强制）
-- **$k = 2$：** $a_2$ 为自由参数，由初始条件决定
-- **$k \geq 3$：** 递推公式
+- **$k = 0$:** $a_0^2 = 1 \Rightarrow a_0 = 1$ (taking the stable solution)
+- **$k = 1$:** $a_1 = 2a_0 a_1 \Rightarrow a_1 = 0$ (forced)
+- **$k = 2$:** $a_2$ is a free parameter, determined by the initial condition
+- **$k \geq 3$:** recurrence formula
 
 $$
 a_k = -\frac{1}{k - 2} \sum_{j=1}^{k-1} a_j a_{k-j}
 $$
 
-**初始条件与 $a_2$ 的关系：**
+**Relationship between Initial Condition and $a_2$:**
 
-若 $y(0) = y_0$，则 $C = \text{artanh}(y_0)$，从而：
+If $y(0) = y_0$, then $C = \text{artanh}(y_0)$, hence:
 
 $$
 a_2 = \frac{2(1 - y_0)}{1 + y_0} = 2e^{-2C}
 $$
 
-**特点：**
-- 在 $x \to \infty$ 时精度高
-- 系数可精确递推计算，无需拟合
-- 奇数项系数为零（若 $a_1 = 0$）
+**Characteristics:**
+- High accuracy as $x \to \infty$
+- Coefficients can be computed exactly via recurrence, no fitting required
+- Odd-order coefficients are zero (if $a_1 = 0$)
 
 ---
 
-## 5. 方法对比
+## 5. Method Comparison
 
-| 方法 | 适用区域 | 精度 | 计算方式 |
-|------|----------|------|----------|
-| 多项式逼近 | $x \approx 0$ | 局部高精度 | 递推 |
-| 稳定性分析 | 全局定性 | 定性判断 | 线性化 |
-| 指数逼近 | $x \to \infty$ | 渐近高精度 | 递推 |
+| Method | Applicable Region | Accuracy | Computation Method |
+|--------|-------------------|----------|-------------------|
+| Polynomial Approximation | $x \approx 0$ | Local high accuracy | Recurrence |
+| Stability Analysis | Global qualitative | Qualitative judgment | Linearization |
+| Exponential Approximation | $x \to \infty$ | Asymptotic high accuracy | Recurrence |
 
 ---
 
-## 6. 代码实现
+## 6. Code Implementation
 
-- `poly_approx.jl`：多项式系数递推与可视化
-- `stable_region.jl`：稳定区域与不同初值解的演化
-- `exp_approx.jl`：指数展开系数递推与渐近逼近
+- `poly_approx.jl`: Polynomial coefficient recurrence and visualization
+- `stable_region.jl`: Stability region and evolution of solutions with different initial values
+- `exp_approx.jl`: Exponential expansion coefficient recurrence and asymptotic approximation
