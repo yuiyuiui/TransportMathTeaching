@@ -44,7 +44,6 @@ Prove the following statements:
    $$
    then the solution is unstable in the sense that it does **not** converge to any finite limit as $x \to \infty$.
 
-*Hint:* Use monotonicity arguments and comparison principles.
 
 ---
 
