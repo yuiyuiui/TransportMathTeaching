@@ -258,7 +258,7 @@ $$
 Initial condition:
 
 $$
-w(x,0)=x-1 + \chi_{\{1\}}(x)
+w(x,0)=x-1 + \chi_{\{0\}}(x)
 $$
 
 $\chi_I(x)$ is the indicator function of the set $I$.
@@ -274,7 +274,7 @@ $$
 So:
 
 $$
-x-1 + \chi_{\{1\}}(x)=\sum_{n=1}^{\infty} B_n\sin(n\pi x)
+x-1 + \chi_{\{0\}}(x)=\sum_{n=1}^{\infty} B_n\sin(n\pi x)
 $$
 
 ---
@@ -296,7 +296,7 @@ $$
 ## 2. Multiply by $\sin(m\pi x)$ and integrate
 
 $$
-\int_0^1 (x-1 + \chi_{\{1\}}(x))\sin(m\pi x)\,dx
+\int_0^1 (x-1 + \chi_{\{0\}}(x))\sin(m\pi x)\,dx
 =\int_0^1 (x-1)\sin(m\pi x)\,dx
 =\frac12 B_m
 $$
@@ -400,7 +400,7 @@ $$
 
 # 10. Physical interpretation
 
-- When $t\to 0$, the series cancels out $1-x$, satisfying the initial condition $u=0 + \chi_{\{1\}}(x)$.
+- When $t\to 0$, the series cancels out $1-x$, satisfying the initial condition $u=0 + \chi_{\{0\}}(x)$.
 - When $t\to \infty$, the exponential term decays to 0.
 - The limit solution is:
 
